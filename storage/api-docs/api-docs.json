@@ -1,0 +1,324 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Fridge Master API Documentation",
+        "contact": {
+            "email": "spetrenkom11@gmail.com"
+        },
+        "version": "0.1"
+    },
+    "servers": [
+        {
+            "url": "/api/v1",
+            "description": "main site"
+        }
+    ],
+    "paths": {
+        "/bookings": {
+            "get": {
+                "operationId": "afb8b225fc78962125d01a6c8e8af2ae",
+                "requestBody": {
+                    "request": "bookings",
+                    "description": "get user bookings",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "string",
+                                        "example": "3"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "bookings": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "locations": {
+                                                        "type": "string",
+                                                        "example": "{{}}"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "example": [
+                                                {
+                                                    "id": 3,
+                                                    "status": "pending",
+                                                    "volume": 17,
+                                                    "temperature": "+6",
+                                                    "days": 6,
+                                                    "location": {
+                                                        "title": "Jersey",
+                                                        "id": 3
+                                                    },
+                                                    "warehouse code": "567fgh&*(FGH"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/booking/create": {
+            "post": {
+                "operationId": "d154762f9b0021766c2180600ad75f31",
+                "requestBody": {
+                    "request": "booking",
+                    "description": "Data for booking",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "string",
+                                        "example": "3"
+                                    },
+                                    "location_id": {
+                                        "type": "string",
+                                        "example": "4"
+                                    },
+                                    "volume": {
+                                        "type": "integer",
+                                        "example": "7"
+                                    },
+                                    "days": {
+                                        "type": "integer",
+                                        "example": "21"
+                                    },
+                                    "temperature": {
+                                        "type": "integer",
+                                        "example": "+5"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Booking successfull created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Booking successfull"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Wrong sended data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "validation error"
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "field": {
+                                                        "type": "string",
+                                                        "example": [
+                                                            []
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "example": {
+                                                "field": [
+                                                    "The __ field is required"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Booking not completed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Booking not completed"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/calculate": {
+            "post": {
+                "operationId": "24eb19294d19bdf861b74c7385886f7c",
+                "requestBody": {
+                    "request": "calculate",
+                    "description": "Data for calculate",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "location_id": {
+                                        "type": "string",
+                                        "example": "4"
+                                    },
+                                    "volume": {
+                                        "type": "integer",
+                                        "example": "7"
+                                    },
+                                    "days": {
+                                        "type": "integer",
+                                        "example": "21"
+                                    },
+                                    "temperature": {
+                                        "type": "integer",
+                                        "example": "+5"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Calculate completed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "response": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "field": {
+                                                        "type": "string",
+                                                        "example": [
+                                                            []
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "example": {
+                                                "cost": 300,
+                                                "required volume": 17,
+                                                "availability": true
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/locations": {
+            "get": {
+                "operationId": "3bad728e786474a24578b9579ee37a1a",
+                "requestBody": {
+                    "description": "get locations",
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "locations": {
+                                                        "type": "string",
+                                                        "example": "{{}}"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "example": {
+                                                "locations": [
+                                                    {
+                                                        "title": "Jersey",
+                                                        "id": "4"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
